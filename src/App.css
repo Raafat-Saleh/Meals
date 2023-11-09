@@ -1,0 +1,11 @@
+/** @format */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.img {
+  margin: 0 auto;
+  margin-bottom: 24px;
+  object-fit: cover;
+}
