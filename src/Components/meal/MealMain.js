@@ -21,22 +21,24 @@ function Carolies() {
       `https://api.spoonacular.com/mealplanner/generate?apiKey=${API_KEY}&timeFrame=day&targetCalories=${calories}`
     )
       .then((response) => {
+        // 402
+        if (response.status === 402) {
+          seterr(true);
+          setErrMessage(
+            `You reached the limit today, You can Try tomorrow or 
+             Upgrade your Plan`
+          );
+          return;
+        }
+
         // 404
         if (response.status === 404) {
           seterr(true);
           setErrMessage(`Something wrong happen, Please try again latar`);
           return;
         }
-        // 402
-        if (response.status === 402) {
-          seterr(true);
-          setErrMessage(
-            `You reached the  limit today, You can Try tomorrow or 
-             Upgrade your Plan`
-          );
-          return;
-        }
         //end
+
         return response.json();
       })
       .then((data) => {
@@ -51,7 +53,8 @@ function Carolies() {
       })
       .catch((e) => {
         seterr(true);
-        setErrMessage(e.message);
+        setErrMessage(`The limit has been reached today, You can Try tomorrow or 
+        Upgrade your Plan`);
       });
   }
 
